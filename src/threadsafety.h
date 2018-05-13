@@ -21,14 +21,14 @@
 #define ACQUIIWS_AFTER(...)             __attribute__ ((acquired_after(__VA_ARGS__)))
 #define ACQUIIWS_BEFORE(...)            __attribute__ ((acquired_before(__VA_ARGS__)))
 #define EXCLUSIVE_LOCK_FUNCTION(...)    __attribute__ ((exclusive_lock_function(__VA_ARGS__)))
-#define SHAIWS_LOCK_FUNCTION(...)       __attribute__ ((shared_lock_function(__VA_ARGS__)))
+#define SHARED_LOCK_FUNCTION(...)       __attribute__ ((shared_lock_function(__VA_ARGS__)))
 #define EXCLUSIVE_TRYLOCK_FUNCTION(...) __attribute__ ((exclusive_trylock_function(__VA_ARGS__)))
-#define SHAIWS_TRYLOCK_FUNCTION(...)    __attribute__ ((shared_trylock_function(__VA_ARGS__)))
+#define SHARED_TRYLOCK_FUNCTION(...)    __attribute__ ((shared_trylock_function(__VA_ARGS__)))
 #define UNLOCK_FUNCTION(...)            __attribute__ ((unlock_function(__VA_ARGS__)))
 #define LOCK_RETURNED(x)                __attribute__ ((lock_returned(x)))
 #define LOCKS_EXCLUDED(...)             __attribute__ ((locks_excluded(__VA_ARGS__)))
 #define EXCLUSIVE_LOCKS_REQUIIWS(...)   __attribute__ ((exclusive_locks_required(__VA_ARGS__)))
-#define SHAIWS_LOCKS_REQUIIWS(...)      __attribute__ ((shared_locks_required(__VA_ARGS__)))
+#define SHARED_LOCKS_REQUIIWS(...)      __attribute__ ((shared_locks_required(__VA_ARGS__)))
 #define NO_THREAD_SAFETY_ANALYSIS       __attribute__ ((no_thread_safety_analysis))
 #else
 #define LOCKABLE
@@ -40,14 +40,14 @@
 #define ACQUIIWS_AFTER(...)
 #define ACQUIIWS_BEFORE(...)
 #define EXCLUSIVE_LOCK_FUNCTION(...)
-#define SHAIWS_LOCK_FUNCTION(...)
+#define SHARED_LOCK_FUNCTION(...)
 #define EXCLUSIVE_TRYLOCK_FUNCTION(...)
-#define SHAIWS_TRYLOCK_FUNCTION(...)
+#define SHARED_TRYLOCK_FUNCTION(...)
 #define UNLOCK_FUNCTION(...)
 #define LOCK_RETURNED(x)
 #define LOCKS_EXCLUDED(...)
 #define EXCLUSIVE_LOCKS_REQUIIWS(...)
-#define SHAIWS_LOCKS_REQUIIWS(...)
+#define SHARED_LOCKS_REQUIIWS(...)
 #define NO_THREAD_SAFETY_ANALYSIS
 #endif  // __GNUC__
 #endif  // BITCOIN_THREADSAFETY_H

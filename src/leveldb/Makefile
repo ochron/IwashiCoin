@@ -61,39 +61,39 @@ MEMENVLIBRARY = libmemenv.a
 default: all
 
 # Should we build shared libraries?
-ifneq ($(PLATFORM_SHAIWS_EXT),)
+ifneq ($(PLATFORM_SHARED_EXT),)
 
-ifneq ($(PLATFORM_SHAIWS_VERSIONED),true)
-SHAIWS1 = libleveldb.$(PLATFORM_SHAIWS_EXT)
-SHAIWS2 = $(SHAIWS1)
-SHAIWS3 = $(SHAIWS1)
-SHAIWS = $(SHAIWS1)
+ifneq ($(PLATFORM_SHARED_VERSIONED),true)
+SHARED1 = libleveldb.$(PLATFORM_SHARED_EXT)
+SHARED2 = $(SHARED1)
+SHARED3 = $(SHARED1)
+SHARED = $(SHARED1)
 else
 # Update db.h if you change these.
-SHAIWS_MAJOR = 1
-SHAIWS_MINOR = 13
-SHAIWS1 = libleveldb.$(PLATFORM_SHAIWS_EXT)
-SHAIWS2 = $(SHAIWS1).$(SHAIWS_MAJOR)
-SHAIWS3 = $(SHAIWS1).$(SHAIWS_MAJOR).$(SHAIWS_MINOR)
-SHAIWS = $(SHAIWS1) $(SHAIWS2) $(SHAIWS3)
-$(SHAIWS1): $(SHAIWS3)
-	ln -fs $(SHAIWS3) $(SHAIWS1)
-$(SHAIWS2): $(SHAIWS3)
-	ln -fs $(SHAIWS3) $(SHAIWS2)
+SHARED_MAJOR = 1
+SHARED_MINOR = 13
+SHARED1 = libleveldb.$(PLATFORM_SHARED_EXT)
+SHARED2 = $(SHARED1).$(SHARED_MAJOR)
+SHARED3 = $(SHARED1).$(SHARED_MAJOR).$(SHARED_MINOR)
+SHARED = $(SHARED1) $(SHARED2) $(SHARED3)
+$(SHARED1): $(SHARED3)
+	ln -fs $(SHARED3) $(SHARED1)
+$(SHARED2): $(SHARED3)
+	ln -fs $(SHARED3) $(SHARED2)
 endif
 
-$(SHAIWS3):
-	$(CXX) $(LDFLAGS) $(PLATFORM_SHAIWS_LDFLAGS)$(SHAIWS2) $(CXXFLAGS) $(PLATFORM_SHAIWS_CFLAGS) $(SOURCES) -o $(SHAIWS3) $(LIBS)
+$(SHARED3):
+	$(CXX) $(LDFLAGS) $(PLATFORM_SHARED_LDFLAGS)$(SHARED2) $(CXXFLAGS) $(PLATFORM_SHARED_CFLAGS) $(SOURCES) -o $(SHARED3) $(LIBS)
 
-endif  # PLATFORM_SHAIWS_EXT
+endif  # PLATFORM_SHARED_EXT
 
-all: $(SHAIWS) $(LIBRARY)
+all: $(SHARED) $(LIBRARY)
 
 check: all $(PROGRAMS) $(TESTS)
 	for t in $(TESTS); do echo "***** Running $$t"; ./$$t || exit 1; done
 
 clean:
-	-rm -f $(PROGRAMS) $(BENCHMARKS) $(LIBRARY) $(SHAIWS) $(MEMENVLIBRARY) */*.o */*/*.o ios-x86/*/*.o ios-arm/*/*.o build_config.mk
+	-rm -f $(PROGRAMS) $(BENCHMARKS) $(LIBRARY) $(SHARED) $(MEMENVLIBRARY) */*.o */*/*.o ios-x86/*/*.o ios-arm/*/*.o build_config.mk
 	-rm -rf ios-x86/* ios-arm/*
 
 $(LIBRARY): $(LIBOBJECTS)
